@@ -1,0 +1,57 @@
+<?php if (empty($vote)) { return; } ?>
+<?php if($vote['type'] == 'plus') { 
+	// Add needed js/css files
+	$this->jQuery();
+	$this->bootstrap(array(
+	    'js/bootstrap.min.js',
+	    'css/font-awesome.min.css'
+	));
+	$this->js($this->assetModule('script/plus.js', 'vote'));
+	$this->css($this->assetModule('script/front.css', 'vote'));
+   // Set vote point
+	$vote['point'] = (!empty($vote['point'])) ? $vote['point'] : 0;
+	// Set point class
+	$pointClass = '';	
+	if($vote['point'] > 0) {
+		$pointClass = ' btn-success';	
+	} elseif($vote['point'] < 0) {
+		$pointClass = ' btn-danger';	
+	}			
+?>
+<div id="votebar-<?php echo $vote['module']; ?>-<?php echo $vote['item']; ?>" class="votebar btn-group <?php if(isset($voteClass)) {echo $voteClass;} ?>">
+   <a class="btn btn-small" id="vote-<?php echo $vote['module']; ?>-<?php echo $vote['item']; ?>-up" onclick="Set_Vote({to: '<?php echo $vote['module']; ?>', item: '<?php echo $vote['item']; ?>', vote: '1' <?php if (!empty($vote['table'])) { ?>, table: '<?php echo $vote['table']; ?>'<?php } ?>}, '<?php echo Pi::url('vote', true); ?>', '<?php echo $vote['item']; ?>', '<?php echo $vote['module']; ?>');"><i class='icon-thumbs-up'></i></a>
+   <a class="btn btn-small<?php echo $pointClass; ?>" id="vote-<?php echo $vote['module']; ?>-<?php echo $vote['item']; ?>-do"><?php echo $vote['point']; ?></a>
+   <a class="btn btn-small" id="vote-<?php echo $vote['module']; ?>-<?php echo $vote['item']; ?>-down" onclick="Set_Vote({to: '<?php echo $vote['module']; ?>', item: '<?php echo $vote['item']; ?>', vote: '-1' <?php if (!empty($vote['table'])) { ?>, table: '<?php echo $vote['table']; ?>'<?php } ?>}, '<?php echo Pi::url('vote', true); ?>', '<?php echo $vote['item']; ?>', '<?php echo $vote['module']; ?>');"><i class='icon-thumbs-down'></i></a>
+</div>
+<?php } elseif($vote['type'] == 'star') { 
+   $this->jQuery();
+	$this->js($this->assetModule('script/rateit.js', 'vote'));
+	$this->css($this->assetModule('script/rateit.css', 'vote'));
+	$this->css($this->assetModule('script/front.css', 'vote'));
+?>	
+<div class="vote">
+	<input value="<?php echo ceil($vote['point'] / $vote['count']); ?>" step="1" id="backing<?php echo $vote['item']; ?>" type="range">
+	<div class="rateit" data-url="<?php echo Pi::url('vote', true); ?>" data-item="<?php echo $vote['item']; ?>" data-to="<?php echo $vote['module']; ?>" data-rateit-backingfld="#backing<?php echo $vote['item']; ?>" data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="10"></div>
+</div>
+<script type="text/javascript">
+    $('.vote .rateit').bind('rated reset', function (e) {
+		var ri = $(this);
+		var vote = ri.rateit('vote');
+		var item = ri.data('item');
+		var to = ri.data('to');
+		var url = ri.data('url');
+		ri.rateit('readonly', true);
+		$.ajax({
+			url: url,
+			data: { item: item, to: to, vote: vote<?php if (!empty($vote['table'])) { ?>, table: '<?php echo $vote['table']; ?>'<?php } ?> },
+			type: 'POST',
+			dataType: "json",
+			success:function (result) {
+        	   if (!result.status == 1) {
+	            alert(result.message);
+        	   }
+        }
+		});
+	});
+</script>
+<?php } ?>
