@@ -1,0 +1,31 @@
+<?php
+	$this->jQuery();
+	$this->js($this->assetModule('script/rateit.js', 'vote'));
+	$this->css($this->assetModule('script/rateit.css', 'vote'));
+?>	
+<div class="vote">
+	<input value="<?php echo ceil($vote['point'] / $vote['count']); ?>" step="1" id="backing<?php echo $vote['item']; ?>" type="range">
+	<div class="rateit" data-url="<?php echo Pi::url('vote', true); ?>" data-item="<?php echo $vote['item']; ?>" data-table="<?php echo $vote['table']; ?>" data-to="<?php echo $vote['module']; ?>" data-rateit-backingfld="#backing<?php echo $vote['item']; ?>" data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="10"></div>
+</div>
+<script type="text/javascript">
+	$('.vote .rateit').bind('rated reset', function (e) {
+		var ri = $(this);
+		var vote = ri.rateit('vote');
+		var item = ri.data('item');
+		var table = ri.data('table');
+		var to = ri.data('to');
+		var url = ri.data('url');
+		ri.rateit('readonly', true);
+		$.ajax({
+			url: url,
+			data: { item: item, table: table, to: to, vote: vote},
+			type: 'POST',
+			dataType: "json",
+			success:function (result) {
+        		if (!result.status == 1) {
+	        		alert(result.message);
+        		}
+    		}
+		});
+	});
+</script>

@@ -5,18 +5,22 @@
 			<th><?php _e('ID'); ?></th>
 			<th><?php _e('User'); ?></th>
 			<th><?php _e('Module'); ?></th>
+			<th><?php _e('Table'); ?></th>
 			<th><?php _e('Item'); ?></th>
+			<th><?php _e('Ip'); ?></th>
 			<th><?php _e('Create'); ?></th>
 		</tr>
-		<?php foreach($votes as $vote) { ?>
+		<?php foreach($list as $vote) { ?>
 		<tr>
 			<td><?php echo $this->escape($vote['id']); ?></td>
-			<td><?php echo $this->escape($vote['identity']); ?></td>
+			<td><?php echo $this->escape($vote['user']['identity']); ?> (<?php echo $this->escape($vote['user']['id']); ?>)</td>
 			<td><?php echo $this->escape($vote['module']); ?></td>
+			<td><?php echo $this->escape($vote['table']); ?></td>
 			<td><?php echo $this->escape($vote['item']); ?></td>
-			<td><?php echo $this->escape($vote['create']); ?></td>
+			<td><?php echo $this->escape($vote['ip']); ?></td>
+			<td><?php echo $this->escape($vote['time_create']); ?></td>
 		</tr>
 		<?php } ?>
 	</table>
-	<div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator'); ?></div>
+	<div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
 </div>
