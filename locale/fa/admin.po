@@ -1,0 +1,105 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Vote\n"
+"POT-Creation-Date: 2014-08-12 16:09+0330\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _a;_t\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-release-2.4.0/usr/module/"
+"vote\n"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/permission.php:17
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/page.php:17
+msgid "Index"
+msgstr "صفحه اصلی"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/permission.php:23
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/navigation.php:25
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/page.php:22
+msgid "Tools"
+msgstr "ابزار"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/navigation.php:16
+msgid "Last votes"
+msgstr "آخرین رای ها"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/module.php:16
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/config.php:20
+msgid "Vote"
+msgstr "رای"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/module.php:17
+msgid "Vote system"
+msgstr "سیستم رای"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/config.php:16
+msgid "Admin"
+msgstr "مدیریت"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/config.php:28
+msgid "Perpage"
+msgstr "تعداد در هر صفحه"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/config.php:36
+msgid "Vote count"
+msgstr "تعداد رای"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/config.php:37
+msgid "Count of X last vote for show in admin"
+msgstr "تعداد X رای آخر برای نمایش در صفحات مدیریت"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/config.php:45
+msgid "Delay time"
+msgstr "زمان تاخیر"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/config.php:46
+msgid ""
+"Delay time between two vote for each user. According to second, Set 0 for "
+"cancel check"
+msgstr ""
+"زمان تاخیر بین دو ثبت رای برای هر کاربر، بر اساس ثانیه. برای لغو بررسی 0 "
+"تنظیم شود"
+
+#~ msgid "Error to voting"
+#~ msgstr "خطا در ثبت رای"
+
+#~ msgid "Your vote number is not true"
+#~ msgstr "مقدار رای شما صحیح نیست"
+
+#~ msgid "Please login for vote"
+#~ msgstr "لطفا برای ثبت رای وارد سایت شوید"
+
+#~ msgid "You can vote after %s second"
+#~ msgstr "شما میتوانید بعد از %s ثانیه مجددا رای دهید"
+
+#~ msgid "You already voted to this item"
+#~ msgstr "شما قبلا به این مورد رای داده اید"
+
+#~ msgid "ID"
+#~ msgstr "شناسه"
+
+#~ msgid "User"
+#~ msgstr "کاربر"
+
+#~ msgid "Module"
+#~ msgstr "ماژول"
+
+#~ msgid "Table"
+#~ msgstr "جدول"
+
+#~ msgid "Item"
+#~ msgstr "آیتم"
+
+#~ msgid "Ip"
+#~ msgstr "آی پی"
+
+#~ msgid "Create"
+#~ msgstr "ایجاد"

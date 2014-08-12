@@ -13,9 +13,9 @@
 return array(
     // Module meta
     'meta'         => array(
-        'title'         => __('Vote'),
-        'description'   => __('Vote system'),
-        'version'       => '1.1.0',
+        'title'         => _a('Vote'),
+        'description'   => _a('Vote system'),
+        'version'       => '1.2.0',
         'license'       => 'New BSD',
         'logo'          => 'image/logo.png',
         'readme'        => 'docs/readme.txt',

@@ -13,11 +13,11 @@
 return array(
     'category' => array(
         array(
-            'title' => __('Admin'),
+            'title' => _a('Admin'),
             'name' => 'admin'
         ),
         array(
-            'title' => __('Vote'),
+            'title' => _a('Vote'),
             'name' => 'vote'
         ),
     ),
@@ -25,7 +25,7 @@ return array(
         // Admin
         'admin_perpage' => array(
             'category' => 'admin',
-            'title' => __('Perpage'),
+            'title' => _a('Perpage'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
@@ -33,8 +33,8 @@ return array(
         ),
         'admin_count' => array(
             'category' => 'admin',
-            'title' => __('Vote count'),
-            'description' => __('Count of X last vote for show in admin'),
+            'title' => _a('Vote count'),
+            'description' => _a('Count of X last vote for show in admin'),
             'edit' => 'text',
             'filter' => 'number_int',
             'value' => 500
@@ -42,8 +42,8 @@ return array(
         // vote
         'vote_delay' => array(
             'category' => 'vote',
-            'title' => __('Delay time'),
-            'description' => __('Delay time between two vote for each user. According to second, Set 0 for cancel check'),
+            'title' => _a('Delay time'),
+            'description' => _a('Delay time between two vote for each user. According to second, Set 0 for cancel check'),
             'edit' => 'text',
             'filter' => 'number_int',
             'value' => 60

@@ -13,22 +13,22 @@
 return array(
     'admin' => array(
         'last' => array(
-            'label' => __('Last votes'),
-            'permission' => array(
-                'resource' => 'index',
+            'label'       => _a('Last votes'),
+            'permission'  => array(
+                'resource'    => 'index',
             ),
-            'route' => 'admin',
-            'controller' => 'index',
-            'action' => 'index',
+            'route'       => 'admin',
+            'controller'  => 'index',
+            'action'      => 'index',
         ),
         'tools' => array(
-            'label' => __('Tools'),
-            'permission' => array(
-                'resource' => 'tools',
+            'label'       => _a('Tools'),
+            'permission'  => array(
+                'resource'    => 'tools',
             ),
-            'route' => 'admin',
-            'controller' => 'tools',
-            'action' => 'index',
+            'route'       => 'admin',
+            'controller'  => 'tools',
+            'action'      => 'index',
         ),
     ),
 );

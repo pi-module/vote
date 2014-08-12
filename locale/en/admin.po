@@ -1,0 +1,67 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Vote\n"
+"POT-Creation-Date: 2014-08-12 16:09+0330\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _a;_t\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-release-2.4.0/usr/module/"
+"vote\n"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/permission.php:17
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/page.php:17
+msgid "Index"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/permission.php:23
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/navigation.php:25
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/page.php:22
+msgid "Tools"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/navigation.php:16
+msgid "Last votes"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/module.php:16
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/config.php:20
+msgid "Vote"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/module.php:17
+msgid "Vote system"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/config.php:16
+msgid "Admin"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/config.php:28
+msgid "Perpage"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/config.php:36
+msgid "Vote count"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/config.php:37
+msgid "Count of X last vote for show in admin"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/config.php:45
+msgid "Delay time"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/vote/config/config.php:46
+msgid ""
+"Delay time between two vote for each user. According to second, Set 0 for "
+"cancel check"
+msgstr ""
