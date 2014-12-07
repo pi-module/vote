@@ -15,18 +15,18 @@ return array(
     'meta'         => array(
         'title'         => _a('Vote'),
         'description'   => _a('Vote system'),
-        'version'       => '1.2.0',
+        'version'       => '1.2.1',
         'license'       => 'New BSD',
         'logo'          => 'image/logo.png',
         'readme'        => 'docs/readme.txt',
-        'demo'          => 'http://demo.xoopsengine.org/news',
+        'demo'          => 'http://pialog.org',
         'icon'          => 'fa-thumbs-up',
     ),
     // Author information
     'author'        => array(
         'Name'          => 'Hossein Azizabadi',
         'email'         => 'azizabadi@faragostaresh.com',
-        'website'       => 'http://www.xoopsengine.org',
+        'website'       => 'http://pialog.org',
         'credits'       => 'Pi Engine Team'
     ),
     // resource

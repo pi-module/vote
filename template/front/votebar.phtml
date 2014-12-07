@@ -2,11 +2,11 @@
 if (!empty($vote)) {
 	switch ($vote['type']) {
 		case 'plus':
-		    include $this->template('module/vote:front/plus');
+		    include $this->template('plus.phtml', 'front', 'vote');
 			break;
 
 		case 'star':
-            include $this->template('module/vote:front/star');
+            include $this->template('star.phtml', 'front', 'vote');
 			break;	
 	}
 } 

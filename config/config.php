@@ -13,40 +13,40 @@
 return array(
     'category' => array(
         array(
-            'title' => _a('Admin'),
+            'title'        => _a('Admin'),
             'name' => 'admin'
         ),
         array(
-            'title' => _a('Vote'),
+            'title'        => _a('Vote'),
             'name' => 'vote'
         ),
     ),
     'item' => array(
         // Admin
         'admin_perpage' => array(
-            'category' => 'admin',
-            'title' => _a('Perpage'),
-            'description' => '',
-            'edit' => 'text',
-            'filter' => 'number_int',
-            'value' => 50
+            'category'     => 'admin',
+            'title'        => _a('Perpage'),
+            'description'  => '',
+            'edit'         => 'text',
+            'filter'       => 'number_int',
+            'value'        => 50
         ),
         'admin_count' => array(
-            'category' => 'admin',
-            'title' => _a('Vote count'),
-            'description' => _a('Count of X last vote for show in admin'),
-            'edit' => 'text',
-            'filter' => 'number_int',
-            'value' => 500
+            'category'     => 'admin',
+            'title'        => _a('Vote count'),
+            'description'  => _a('Count of X last vote for show in admin'),
+            'edit'         => 'text',
+            'filter'       => 'number_int',
+            'value'        => 500
         ),
         // vote
         'vote_delay' => array(
-            'category' => 'vote',
-            'title' => _a('Delay time'),
-            'description' => _a('Delay time between two vote for each user. According to second, Set 0 for cancel check'),
-            'edit' => 'text',
-            'filter' => 'number_int',
-            'value' => 60
+            'category'     => 'vote',
+            'title'        => _a('Delay time'),
+            'description'  => _a('Delay time between two vote for each user. According to second, Set 0 for cancel check'),
+            'edit'         => 'text',
+            'filter'       => 'number_int',
+            'value'        => 60
         ),
     ),
 );
