@@ -1,16 +1,12 @@
 <?php
-	// Load jQuery
-	$this->jQuery();
-	// Load js files
-	$this->js($this->assetModule('script/rateit.js', 'vote'));
-	// Load css files
-	$this->css($this->assetModule('script/rateit.css', 'vote'));
-?>	
-<div class="vote">
-	<input value="<?php echo ceil($vote['point'] / $vote['count']); ?>" step="1" id="backing<?php echo $vote['item']; ?>" type="range">
-	<div class="rateit" data-url="<?php echo Pi::url('vote', true); ?>" data-item="<?php echo $vote['item']; ?>" data-table="<?php echo $vote['table']; ?>" data-to="<?php echo $vote['module']; ?>" data-rateit-backingfld="#backing<?php echo $vote['item']; ?>" data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="10"></div>
-</div>
-<script type="text/javascript">
+// Load jQuery
+$this->jQuery();
+// Load js files
+$this->js($this->assetModule('script/rateit.js', 'vote'));
+// Load css files
+$this->css($this->assetModule('script/rateit.css', 'vote'));
+//
+$script = <<<'EOT'
 	$('.vote .rateit').bind('rated reset', function (e) {
 		var ri = $(this);
 		var vote = ri.rateit('vote');
@@ -31,4 +27,18 @@
     		}
 		});
 	});
-</script>
+EOT;
+$this->footScript()->appendScript($script);
+?>
+<div class="vote" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+    <input value="<?php echo ceil($vote['point'] / $vote['count']); ?>" step="1"
+           id="backing<?php echo $vote['item']; ?>" type="range">
+    <div class="rateit" data-url="<?php echo Pi::url('vote', true); ?>" data-item="<?php echo $vote['item']; ?>"
+         data-table="<?php echo $vote['table']; ?>" data-to="<?php echo $vote['module']; ?>"
+         data-rateit-backingfld="#backing<?php echo $vote['item']; ?>" data-rateit-resetable="false"
+         data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5"></div>
+    <meta itemprop="worstRating" content="1">
+    <meta itemprop="bestRating" content="5">
+    <meta itemprop="ratingValue" content="<?php echo ceil($vote['point'] / $vote['count']); ?>">
+    <meta itemprop="reviewCount" content="<?php echo $vote['count']; ?>">
+</div>

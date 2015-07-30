@@ -1,45 +1,53 @@
 <?php
-	// Load jQuery
-	$this->jQuery();
-	// Load js files
-	$this->js($this->assetModule('script/plus.min.js', 'vote'));
-	// Set point
-	$vote['point'] = (!empty($vote['point'])) ? $vote['point'] : 0;
-	// Set color
-	if($vote['point'] > 0) {
-		$pointClass = 'btn-success';	
-	} elseif($vote['point'] < 0) {
-		$pointClass = 'btn-danger';	
-	} else {
-		$pointClass = 'btn-default';	
-	}
-	// Set class
-	$voteClass = isset($vote['class']) ? $vote['class'] : '';
-	// Set html id
-	$voteId = sprintf('%s-%s-%s', $vote['module'] ,$vote['table'], $vote['item']);
-    // Set onclick
-    $onclickUp =<<<'EOT'
+// Load jQuery
+$this->jQuery();
+// Load js files
+$this->js($this->assetModule('script/plus.min.js', 'vote'));
+// Set point
+$vote['point'] = (!empty($vote['point'])) ? $vote['point'] : 0;
+// Set color
+if ($vote['point'] > 0) {
+    $pointClass = 'btn-success';
+} elseif ($vote['point'] < 0) {
+    $pointClass = 'btn-danger';
+} else {
+    $pointClass = 'btn-default';
+}
+// Set class
+$voteClass = isset($vote['class']) ? $vote['class'] : '';
+// Set html id
+$voteId = sprintf('%s-%s-%s', $vote['module'], $vote['table'], $vote['item']);
+// Set onclick
+$onclickUp = <<<'EOT'
 setVote('1', '%s', '%s', '%s', '%s');
 EOT;
-    $onclickUp = sprintf($onclickUp, 
-	    Pi::url('vote', true),
-	    $vote['item'],
-	    $vote['table'],
-	    $vote['module']
-    );
-    // Set onclick
-    $onclickDown =<<<'EOT'
+$onclickUp = sprintf($onclickUp,
+    Pi::url('vote', true),
+    $vote['item'],
+    $vote['table'],
+    $vote['module']
+);
+// Set onclick
+$onclickDown = <<<'EOT'
 setVote('-1', '%s', '%s', '%s', '%s');
 EOT;
-    $onclickDown = sprintf($onclickDown, 
-	    Pi::url('vote', true),
-	    $vote['item'],
-	    $vote['table'],
-	    $vote['module']
-    );
+$onclickDown = sprintf($onclickDown,
+    Pi::url('vote', true),
+    $vote['item'],
+    $vote['table'],
+    $vote['module']
+);
 ?>
-<div id="votebar-<?php echo $voteId; ?>" class="clearfix votebar btn-group <?php echo $voteClass; ?>">
-	<a class="btn btn-default btn-sm" id="vote-<?php echo $voteId; ?>-up" onclick="<?php echo $onclickUp; ?>"><i class="fa fa-thumbs-up"></i></a>
-	<a class="btn <?php echo $pointClass; ?> btn-sm" id="vote-<?php echo $voteId; ?>-do"><?php echo _number($vote['point']); ?></a>
-	<a class="btn btn-default btn-sm" id="vote-<?php echo $voteId; ?>-down" onclick="<?php echo $onclickDown; ?>"><i class="fa fa-thumbs-down"></i></a>
+<div id="votebar-<?php echo $voteId; ?>" class="clearfix votebar btn-group <?php echo $voteClass; ?>"
+     itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+    <a class="btn btn-default btn-sm" id="vote-<?php echo $voteId; ?>-up" onclick="<?php echo $onclickUp; ?>"><i
+            class="fa fa-thumbs-up"></i></a>
+    <a class="btn <?php echo $pointClass; ?> btn-sm"
+       id="vote-<?php echo $voteId; ?>-do"><?php echo _number($vote['point']); ?></a>
+    <a class="btn btn-default btn-sm" id="vote-<?php echo $voteId; ?>-down" onclick="<?php echo $onclickDown; ?>"><i
+            class="fa fa-thumbs-down"></i></a>
+    <meta itemprop="worstRating" content="-1">
+    <meta itemprop="bestRating" content="1">
+    <meta itemprop="ratingValue" content="<?php echo $vote['point']; ?>">
+    <meta itemprop="reviewCount" content="<?php echo $vote['count']; ?>">
 </div>
