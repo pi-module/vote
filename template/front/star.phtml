@@ -30,7 +30,7 @@ $script = <<<'EOT'
 EOT;
 $this->footScript()->appendScript($script);
 ?>
-<div class="vote" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+<div class="vote" itemscope itemtype="http://schema.org/Rating">
     <input value="<?php echo ceil($vote['point'] / $vote['count']); ?>" step="1"
            id="backing<?php echo $vote['item']; ?>" type="range">
     <div class="rateit" data-url="<?php echo Pi::url('vote', true); ?>" data-item="<?php echo $vote['item']; ?>"
