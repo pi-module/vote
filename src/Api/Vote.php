@@ -41,19 +41,30 @@ class Vote extends AbstractApi
         $config = Pi::service('registry')->config->read('vote', 'vote');
         // Get user
         $uid = Pi::user()->getId();
-        if ($uid == 0) {
+        $ip = Pi::user()->getIp();
+
+
+
+
+        if ($uid == 0 && !$config['vote_anonymous']) {
             $return['title'] = __('Error to voting');
             $return['message'] = __('Please login for vote');
             $return['status'] = 0;
         } else {
             // user voted to this item ?
-            $where = array('uid' => $uid, 'item' => $item, 'table' => $table, 'module' => $module);
-            $select = Pi::model('point', $this->getModule())->select()->where($where);
-            $count = Pi::model('point', $this->getModule())->selectWith($select)->count();
+            if ($uid > 0) {
+                $where = array('uid' => $uid, 'item' => $item, 'table' => $table, 'module' => $module);
+                $select = Pi::model('point', $this->getModule())->select()->where($where);
+                $count = Pi::model('point', $this->getModule())->selectWith($select)->count();
+            } else {
+                $where = array('ip' => $ip, 'item' => $item, 'table' => $table, 'module' => $module);
+                $select = Pi::model('point', $this->getModule())->select()->where($where);
+                $count = Pi::model('point', $this->getModule())->selectWith($select)->count();
+            }
             // Check delay
             $delay = true;
             if($config['vote_delay']) {
-		        $delay = $this->checkDelay($uid, $config['vote_delay']);	
+		        $delay = $this->checkDelay($uid, $ip, $config['vote_delay']);
             }
             // Save
             if (!$count && $delay) {
@@ -69,7 +80,7 @@ class Vote extends AbstractApi
                 $point_row->table = $table;
                 $point_row->module = $module;
                 $point_row->point = $vote;
-                $point_row->ip = Pi::user()->getIp();
+                $point_row->ip = $ip;
                 $point_row->time_create = time();
                 $point_row->save();
                 // Return
@@ -92,10 +103,14 @@ class Vote extends AbstractApi
         return $return;
     }
     
-    protected function checkDelay($uid, $time) 
+    protected function checkDelay($uid, $ip, $time)
     {
         // Set where
-        $where = array('uid' => $uid);
+        if ($uid > 0) {
+            $where = array('ip' => $ip);
+        } else {
+            $where = array('uid' => $uid);
+        }
         // Set order
         $order = array('time_create DESC', 'id DESC');
         $column = array('id', 'time_create');

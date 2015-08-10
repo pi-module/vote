@@ -20,10 +20,14 @@ class IndexController extends ActionController
 {
     public function indexAction()
     {
+        // Check post vote
         if ($this->request->isPost()) {
             $params = $this->params()->fromPost();
             return Pi::api('vote', 'vote')->doVote($params);
+        } else {
+            $this->jumpTo404();
         }
+        // Set view
         $this->view()->setTemplate(false)->setLayout('layout-content');
     }
 }

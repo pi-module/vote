@@ -48,5 +48,13 @@ return array(
             'filter'       => 'number_int',
             'value'        => 60
         ),
+        'vote_anonymous' => array(
+            'category' => 'vote',
+            'title' => _a('Anonymous users can vote'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 0
+        ),
     ),
 );
