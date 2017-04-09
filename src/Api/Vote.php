@@ -102,7 +102,7 @@ class Vote extends AbstractApi
                     $return['message'] = sprintf(__('You can vote after %s second'), $config['vote_delay']);
                 } else {
                     $return['title'] = __('Error to voting');
-                    $return['message'] = $score;
+                    $return['message'] = __('You already voted to this item');
                 }
                 $return['status'] = 0;
             }
