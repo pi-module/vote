@@ -12,22 +12,46 @@
  */
 return array(
     'admin' => array(
-        'last' => array(
+        'score' => array(
+            'label'       => _a('Score'),
+            'permission'  => array(
+                'resource'    => 'score',
+            ),
+            'route'       => 'admin',
+            'controller'  => 'score',
+            'action'      => 'index',
+
+            'pages' => array(
+
+                'score' => array(
+                    'label'       => _a('Score'),
+                    'permission'  => array(
+                        'resource'    => 'score',
+                    ),
+                    'route'       => 'admin',
+                    'controller'  => 'score',
+                    'action'      => 'index',
+                ),
+
+                'update' => array(
+                    'label'       => _a('Manage score'),
+                    'permission'  => array(
+                        'resource'    => 'score',
+                    ),
+                    'route'       => 'admin',
+                    'controller'  => 'score',
+                    'action'      => 'update',
+                ),
+
+            ),
+        ),
+        'point' => array(
             'label'       => _a('Last votes'),
             'permission'  => array(
-                'resource'    => 'index',
+                'resource'    => 'point',
             ),
             'route'       => 'admin',
-            'controller'  => 'index',
-            'action'      => 'index',
-        ),
-        'tools' => array(
-            'label'       => _a('Tools'),
-            'permission'  => array(
-                'resource'    => 'tools',
-            ),
-            'route'       => 'admin',
-            'controller'  => 'tools',
+            'controller'  => 'point',
             'action'      => 'index',
         ),
     ),

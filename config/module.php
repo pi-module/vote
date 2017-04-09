@@ -15,7 +15,7 @@ return array(
     'meta'         => array(
         'title'         => _a('Vote'),
         'description'   => _a('Vote system'),
-        'version'       => '1.2.2',
+        'version'       => '1.3.0',
         'license'       => 'New BSD',
         'logo'          => 'image/logo.png',
         'readme'        => 'docs/readme.txt',

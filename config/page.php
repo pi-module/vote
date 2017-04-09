@@ -14,14 +14,14 @@ return array(
     // Admin section
     'admin' => array(
         array(
-            'title'         => _a('Index'),
-            'controller'    => 'index',
-            'permission'    => 'index',
+            'title'         => _a('Score'),
+            'controller'    => 'score',
+            'permission'    => 'score',
         ),
         array(
-            'title'         => _a('Tools'),
-            'controller'    => 'topic',
-            'permission'    => 'topic',
+            'title'         => _a('Last votes'),
+            'controller'    => 'point',
+            'permission'    => 'point',
         ),
     ),
 );

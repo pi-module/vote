@@ -5,7 +5,7 @@ $this->jQuery();
 $this->js($this->assetModule('script/rateit.js', 'vote'));
 // Load css files
 $this->css($this->assetModule('script/rateit.css', 'vote'));
-//
+// Set vote script
 $script = <<<'EOT'
 	$('.vote .rateit').bind('rated reset', function (e) {
 		var ri = $(this);
@@ -29,15 +29,25 @@ $script = <<<'EOT'
 	});
 EOT;
 $this->footScript()->appendScript($script);
+// Set value
+$value = 0;
+if ($vote['point'] > 0 && $vote['count'] > 0) {
+    $value = ceil($vote['point'] / $vote['count']);
+}
 ?>
 <div class="vote" itemscope itemtype="http://schema.org/Rating">
-    <input value="<?php echo ceil($vote['point'] / $vote['count']); ?>" step="1"
+    <input value="<?php echo $value; ?>" step="1"
            id="backing<?php echo $vote['item']; ?>" type="range">
-    <div class="rateit" data-url="<?php echo Pi::url('vote', true); ?>" data-item="<?php echo $vote['item']; ?>"
-         data-table="<?php echo $vote['table']; ?>" data-to="<?php echo $vote['module']; ?>"
-         data-rateit-backingfld="#backing<?php echo $vote['item']; ?>" data-rateit-resetable="false"
-         data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5"></div>
+    <div class="rateit" data-url="<?php echo Pi::url('vote', true); ?>"
+         data-item="<?php echo $vote['item']; ?>"
+         data-table="<?php echo $vote['table']; ?>"
+         data-to="<?php echo $vote['module']; ?>"
+         data-rateit-backingfld="#backing<?php echo $vote['item']; ?>"
+         data-rateit-resetable="false"
+         data-rateit-ispreset="true"
+         data-rateit-min="0"
+         data-rateit-max="5"></div>
     <meta itemprop="worstRating" content="1">
     <meta itemprop="bestRating" content="5">
-    <meta itemprop="ratingValue" content="<?php echo ceil($vote['point'] / $vote['count']); ?>">
+    <meta itemprop="ratingValue" content="<?php echo $value; ?>">
 </div>

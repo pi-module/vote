@@ -18,6 +18,7 @@ use Pi\Application\Api\AbstractApi;
 
 /*
  * Pi::api('vote', 'vote')->doVote($params);
+ * Pi::api('vote', 'vote')->getVoteScore($module, $table, $item);
  */
 
 class Vote extends AbstractApi
@@ -30,22 +31,27 @@ class Vote extends AbstractApi
             $return['message'] = __('Your vote number is not true');
             $return['status'] = 0;
         } else {
-            $return = $this->vote($params['to'], $params['table'], $params['item'], $params['vote']);
+            $return = $this->vote(
+                $params['to'],
+                $params['table'],
+                $params['item'],
+                $params['vote'],
+                isset($params['score']) ? $params['score'] : 1
+            );
         }
         return $return;
     }
-    
-    protected function vote($module, $table, $item, $vote)
+
+    protected function vote($module, $table, $item, $vote, $score = 1)
     {
         // Get config
         $config = Pi::service('registry')->config->read('vote', 'vote');
+
         // Get user
         $uid = Pi::user()->getId();
         $ip = Pi::user()->getIp();
 
-
-
-
+        // Check user
         if ($uid == 0 && !$config['vote_anonymous']) {
             $return['title'] = __('Error to voting');
             $return['message'] = __('Please login for vote');
@@ -53,18 +59,18 @@ class Vote extends AbstractApi
         } else {
             // user voted to this item ?
             if ($uid > 0) {
-                $where = array('uid' => $uid, 'item' => $item, 'table' => $table, 'module' => $module);
+                $where = array('uid' => $uid, 'item' => $item, 'table' => $table, 'module' => $module, 'score' => $score);
                 $select = Pi::model('point', $this->getModule())->select()->where($where);
                 $count = Pi::model('point', $this->getModule())->selectWith($select)->count();
             } else {
-                $where = array('ip' => $ip, 'item' => $item, 'table' => $table, 'module' => $module);
+                $where = array('ip' => $ip, 'item' => $item, 'table' => $table, 'module' => $module, 'score' => $score);
                 $select = Pi::model('point', $this->getModule())->select()->where($where);
                 $count = Pi::model('point', $this->getModule())->selectWith($select)->count();
             }
             // Check delay
             $delay = true;
-            if($config['vote_delay']) {
-		        $delay = $this->checkDelay($uid, $ip, $config['vote_delay']);
+            if ($config['vote_delay']) {
+                $delay = $this->checkDelay($uid, $ip, $config['vote_delay']);
             }
             // Save
             if (!$count && $delay) {
@@ -80,6 +86,7 @@ class Vote extends AbstractApi
                 $point_row->table = $table;
                 $point_row->module = $module;
                 $point_row->point = $vote;
+                $point_row->score = $score;
                 $point_row->ip = $ip;
                 $point_row->time_create = time();
                 $point_row->save();
@@ -90,19 +97,31 @@ class Vote extends AbstractApi
                 $return['count_view'] = _number($item_row->count);
                 $return['status'] = 1;
             } else {
-                if(!$delay) {
+                if (!$delay) {
                     $return['title'] = __('Error to voting');
                     $return['message'] = sprintf(__('You can vote after %s second'), $config['vote_delay']);
                 } else {
                     $return['title'] = __('Error to voting');
-                    $return['message'] = __('You already voted to this item');		
-                }	 
+                    $return['message'] = $score;
+                }
                 $return['status'] = 0;
-            }	
+            }
         }
         return $return;
     }
-    
+
+    public function getVoteScore($module, $table, $item)
+    {
+        $list = array();
+        $where = array('item' => $item, 'table' => $table, 'module' => $module);
+        $select = Pi::model('point', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('point', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $list[$row->score][$row->id] = $row->toArray();
+        }
+        return $list;
+    }
+
     protected function checkDelay($uid, $ip, $time)
     {
         // Set where
@@ -119,10 +138,10 @@ class Vote extends AbstractApi
         $rowset = Pi::model('point', $this->getModule())->selectWith($select)->toArray();
         $time = $rowset[0]['time_create'] + $time;
         // check
-        if(time() > $time) {
+        if (time() > $time) {
             return true;
         } else {
             return false;
-        }		
+        }
     }
-}	
+}

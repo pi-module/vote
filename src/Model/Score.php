@@ -10,18 +10,20 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-namespace Module\Vote\Controller\Admin;
 
-use Pi;
-use Pi\Mvc\Controller\ActionController;
+namespace Module\Vote\Model;
 
-class IndexController extends ActionController
+use Pi\Application\Model\Model;
+
+class Score extends Model
 {
-    public function indexAction()
-    {
-        return $this->redirect()->toRoute('', array(
-            'controller' => 'score',
-            'action' => 'index',
-        ));
-    }
+    /**
+     * {@inheritDoc}
+     */
+    protected $columns = array(
+        'id',
+        'title',
+        'status',
+        'module',
+    );
 }

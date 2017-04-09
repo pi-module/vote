@@ -1,0 +1,63 @@
+<?php
+// Load jQuery
+$this->jQuery();
+// Load js files
+$this->js($this->assetModule('script/rateit.js', 'vote'));
+// Load css files
+$this->css($this->assetModule('script/rateit.css', 'vote'));
+// Set vote script
+$script = <<<'EOT'
+	$('.vote .rateit').bind('rated reset', function (e) {
+		var ri = $(this);
+		var vote = ri.rateit('vote');
+		var score = ri.data('score');
+		var item = ri.data('item');
+		var table = ri.data('table');
+		var to = ri.data('to');
+		var url = ri.data('url');
+		ri.rateit('readonly', true);
+		$.ajax({
+			url: url,
+			data: { item: item, table: table, to: to, vote: vote, score: score},
+			type: 'POST',
+			dataType: "json",
+			success:function (result) {
+        		if (!result.status == 1) {
+	        		alert(result.message);
+        		}
+    		}
+		});
+	});
+EOT;
+$this->footScript()->appendScript($script);
+?>
+<div class="scoreBar clearfix">
+    <?php foreach ($vote['score'] as $score) { ?>
+        <?php if (isset($vote['points'][$score['id']])) {
+            $count = count($vote['points'][$score['id']]);
+            $point = 0;
+            foreach ($vote['points'][$score['id']] as $points) {
+                $point = $point + $points['point'];
+            }
+            $value = ceil($point / $count);
+        } else {
+            $value = 0;
+        } ?>
+        <div class="vote clearfix">
+            <strong><?php echo $score['title']; ?></strong> ( <?php echo _number($value); ?> ) :
+            <input value="<?php echo $value; ?>" step="1" id="backing<?php echo $vote['item']; ?><?php echo $score['id']; ?>" type="range">
+            <div class="rateit"
+                 data-url="<?php echo Pi::url('vote', true); ?>"
+                 data-item="<?php echo $vote['item']; ?>"
+                 data-table="<?php echo $vote['table']; ?>"
+                 data-to="<?php echo $vote['module']; ?>"
+                 data-score="<?php echo $score['id']; ?>"
+                 data-rateit-backingfld="#backing<?php echo $vote['item']; ?><?php echo $score['id']; ?>"
+                 data-rateit-resetable="false"
+                 data-rateit-ispreset="true"
+                 data-rateit-min="0"
+                 data-rateit-max="5">
+            </div>
+        </div>
+    <?php } ?>
+</div>

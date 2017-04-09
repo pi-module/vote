@@ -2,12 +2,16 @@
 if (!empty($vote)) {
 	switch ($vote['type']) {
 		case 'plus':
-		    include $this->template('plus.phtml', 'front', 'vote');
+		    include $this->template('plus', 'front', 'vote');
 			break;
 
 		case 'star':
-            include $this->template('star.phtml', 'front', 'vote');
-			break;	
+            if (isset($vote['score']) && count($vote['score']) > 1) {
+                include $this->template('stars', 'front', 'vote');
+            } else {
+                include $this->template('star', 'front', 'vote');
+            }
+			break;
 	}
 } 
 ?>

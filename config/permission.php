@@ -13,14 +13,14 @@
 return array(
     // Admin section
     'admin' => array(
-        'index'       => array(
-            'title'         => _a('Index'),
+        'score'       => array(
+            'title'         => _a('Score'),
             'access'        => array(
                 //'admin',
             ),
         ),
-        'tools'       => array(
-            'title'         => _a('Tools'),
+        'point'       => array(
+            'title'         => _a('Last votes'),
             'access'        => array(
                 //'admin',
             ),

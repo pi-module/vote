@@ -1,10 +1,5 @@
-/*
- RateIt
- version 1.0.4
- 03/31/2012
- http://rateit.codeplex.com
- Twitter: @gjunge
-
+/**
+ * https://github.com/gjunge/rateit.js
  */
 (function ($) {
     $.fn.rateit = function (p1, p2) {
