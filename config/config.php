@@ -56,5 +56,21 @@ return array(
             'filter'       => 'number_int',
             'value'        => 0
         ),
+        'vote_credit' => array(
+            'category'     => 'vote',
+            'title'        => _a('Update user credit after vote'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 0
+        ),
+        'vote_credit_amount' => array(
+            'category'     => 'vote',
+            'title'        => _a('Vote credit amount'),
+            'description'  => '',
+            'edit'         => 'text',
+            'filter'       => 'number_int',
+            'value'        => 0
+        ),
     ),
 );

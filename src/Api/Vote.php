@@ -106,6 +106,32 @@ class Vote extends AbstractApi
                 }
                 $return['status'] = 0;
             }
+            // Update credit
+            if ($config['vote_credit'] &&
+                $config['vote_credit_amount'] > 0 &&
+                $uid > 0
+                && Pi::service('module')->isActive('order')) {
+
+                $where = array('uid' => $uid, 'item' => $item, 'table' => $table, 'module' => $module);
+                $select = Pi::model('point', $this->getModule())->select()->where($where);
+                $countPoint = Pi::model('point', $this->getModule())->selectWith($select)->count();
+
+                $where = array('module' => $module, 'status' => 1);
+                $select = Pi::model('score', $this->getModule())->select()->where($where);
+                $countScore = Pi::model('score', $this->getModule())->selectWith($select)->count();
+
+                if ($countPoint == $countScore) {
+                    Pi::api('credit', 'order')->addCredit(
+                        $uid,
+                        $config['vote_credit_amount'],
+                        'increase',
+                        'automatic',
+                        __('Add credit after voting'),
+                        __('Add credit after voting'),
+                        $module
+                    );
+                }
+            }
         }
         return $return;
     }
