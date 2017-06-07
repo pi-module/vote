@@ -14,11 +14,12 @@ $script = <<<'EOT'
 		var item = ri.data('item');
 		var table = ri.data('table');
 		var to = ri.data('to');
+		var submodule = ri.data('submodule');
 		var url = ri.data('url');
 		ri.rateit('readonly', true);
 		$.ajax({
 			url: url,
-			data: { item: item, table: table, to: to, vote: vote, score: score},
+			data: { item: item, table: table, to: to, vote: vote, score: score, submodule: submodule},
 			type: 'POST',
 			dataType: "json",
 			success:function (result) {
@@ -52,6 +53,7 @@ $this->footScript()->appendScript($script);
                  data-table="<?php echo $vote['table']; ?>"
                  data-to="<?php echo $vote['module']; ?>"
                  data-score="<?php echo $score['id']; ?>"
+                 data-submodule="<?php echo isset($vote['subModule']) ? $vote['subModule'] : ''; ?>"
                  data-rateit-backingfld="#backing<?php echo $vote['item']; ?><?php echo $score['id']; ?>"
                  data-rateit-resetable="false"
                  data-rateit-ispreset="true"

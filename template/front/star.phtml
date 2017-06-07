@@ -13,6 +13,7 @@ $script = <<<'EOT'
 		var item = ri.data('item');
 		var table = ri.data('table');
 		var to = ri.data('to');
+		var submodule = ri.data('submodule');
 		var url = ri.data('url');
 		ri.rateit('readonly', true);
 		$.ajax({
@@ -42,6 +43,7 @@ if ($vote['point'] > 0 && $vote['count'] > 0) {
          data-item="<?php echo $vote['item']; ?>"
          data-table="<?php echo $vote['table']; ?>"
          data-to="<?php echo $vote['module']; ?>"
+         data-submodule="<?php echo isset($vote['subModule']) ? $vote['subModule'] : ''; ?>"
          data-rateit-backingfld="#backing<?php echo $vote['item']; ?>"
          data-rateit-resetable="false"
          data-rateit-ispreset="true"
