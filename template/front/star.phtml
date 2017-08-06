@@ -36,7 +36,7 @@ if ($vote['point'] > 0 && $vote['count'] > 0) {
     $value = ceil($vote['point'] / $vote['count']);
 }
 ?>
-<div class="vote" itemscope itemtype="http://schema.org/Rating">
+<div class="vote" itemscope itemtype="https://schema.org/Rating">
     <input value="<?php echo $value; ?>" step="1"
            id="backing<?php echo $vote['item']; ?>" type="range">
     <div class="rateit" data-url="<?php echo Pi::url('vote', true); ?>"

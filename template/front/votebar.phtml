@@ -1,5 +1,4 @@
-<?php
-if (!empty($vote)) {
+<?php if (isset($vote) && !empty($vote)) {
 	switch ($vote['type']) {
 		case 'plus':
 		    include $this->template('plus', 'front', 'vote');
@@ -13,5 +12,4 @@ if (!empty($vote)) {
             }
 			break;
 	}
-} 
-?>
+} ?>
