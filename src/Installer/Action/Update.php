@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -26,7 +26,7 @@ class Update extends BasicUpdate
     protected function attachDefaultListeners()
     {
         $events = $this->events;
-        $events->attach('update.pre', array($this, 'updateSchema'));
+        $events->attach('update.pre', [$this, 'updateSchema']);
         parent::attachDefaultListeners();
 
         return $this;
@@ -40,12 +40,13 @@ class Update extends BasicUpdate
         $moduleVersion = $e->getParam('version');
 
         // Set item model
-        $pointModel = Pi::model('point', $this->module);
-        $pointTable = $pointModel->getTable();
+        $pointModel   = Pi::model('point', $this->module);
+        $pointTable   = $pointModel->getTable();
         $pointAdapter = $pointModel->getAdapter();
 
         if (version_compare($moduleVersion, '1.3.0', '<')) {
-            $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{score}` (
   `id`     INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
   `title`  VARCHAR(255)        NOT NULL DEFAULT '',
@@ -66,11 +67,11 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult('db', [
+                    'status'  => false,
                     'message' => 'SQL schema query for package_period table failed: '
                         . $exception->getMessage(),
-                ));
+                ]);
 
                 return false;
             }
@@ -80,11 +81,11 @@ EOD;
             try {
                 $pointAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult('db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]);
                 return false;
             }
 

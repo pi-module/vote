@@ -1,15 +1,16 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt BSD 3-Clause License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt BSD 3-Clause License
  */
 
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Vote\Registry;
 
 use Pi;
@@ -26,11 +27,11 @@ class ScoreList extends AbstractRegistry
     /**
      * {@inheritDoc}
      */
-    protected function loadDynamic($options = array())
+    protected function loadDynamic($options = [])
     {
-        $return = array();
-        $where = array('status' => 1);
-        $order = array('title ASC', 'id ASC');
+        $return = [];
+        $where  = ['status' => 1];
+        $order  = ['title ASC', 'id ASC'];
         $select = Pi::model('score', $this->module)->select()->where($where)->order($order);
         $rowset = Pi::model('score', $this->module)->selectWith($select);
         foreach ($rowset as $row) {
@@ -45,8 +46,8 @@ class ScoreList extends AbstractRegistry
      */
     public function read()
     {
-        $options = array();
-        $result = $this->loadData($options);
+        $options = [];
+        $result  = $this->loadData($options);
 
         return $result;
     }

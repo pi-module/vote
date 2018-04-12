@@ -1,12 +1,16 @@
 <?php
 // Load jQuery
 $this->jQuery();
+
 // Load js files
 $this->js($this->assetModule('script/rateit.js', 'vote'));
+
 // Load css files
 $this->css($this->assetModule('script/rateit.css', 'vote'));
+
 // Set vote script
-$script = <<<'EOT'
+$script
+    = <<<'EOT'
 	$('.vote .rateit').bind('rated reset', function (e) {
 		var ri = $(this);
 		var vote = ri.rateit('vote');
@@ -30,6 +34,7 @@ $script = <<<'EOT'
 	});
 EOT;
 $this->footScript()->appendScript($script);
+
 // Set value
 $value = 0;
 if ($vote['point'] > 0 && $vote['count'] > 0) {

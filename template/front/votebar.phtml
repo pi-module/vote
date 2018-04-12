@@ -1,15 +1,15 @@
 <?php if (isset($vote) && !empty($vote)) {
-	switch ($vote['type']) {
-		case 'plus':
-		    include $this->template('plus', 'front', 'vote');
-			break;
+    switch ($vote['type']) {
+        case 'plus':
+            include $this->template('plus', 'front', 'vote');
+            break;
 
-		case 'star':
+        case 'star':
             if (isset($vote['score']) && count($vote['score']) > 1) {
                 include $this->template('stars', 'front', 'vote');
             } else {
                 include $this->template('star', 'front', 'vote');
             }
-			break;
-	}
-} ?>
+            break;
+    }
+}
