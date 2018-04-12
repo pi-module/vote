@@ -97,41 +97,44 @@ class Vote extends AbstractApi
                 $return['count'] = $item_row->count;
                 $return['count_view'] = _number($item_row->count);
                 $return['status'] = 1;
-            } else {
-                if (!$delay) {
-                    $return['title'] = __('Error to voting');
-                    $return['message'] = sprintf(__('You can vote after %s second'), $config['vote_delay']);
-                } else {
-                    $return['title'] = __('Error to voting');
-                    $return['message'] = __('You already voted to this item');
-                }
-                $return['status'] = 0;
-            }
-            // Update credit
-            if ($config['vote_credit'] &&
-                $config['vote_credit_amount'] > 0 &&
-                $uid > 0
-                && Pi::service('module')->isActive('order')) {
+                // Update credit
+                if ($config['vote_credit'] &&
+                    $config['vote_credit_amount'] > 0 &&
+                    $uid > 0
+                    && Pi::service('module')->isActive('order')) {
 
-                // Set sub module
-                $subModule = !empty($subModule) ? $subModule : $module;
+                    // Set sub module
+                    $subModule = !empty($subModule) ? $subModule : $module;
 
-                $where = array('uid' => $uid, 'item' => $item, 'table' => $table, 'module' => $module);
-                $select = Pi::model('point', $this->getModule())->select()->where($where);
-                $countPoint = Pi::model('point', $this->getModule())->selectWith($select)->count();
+                    $where = array('uid' => $uid, 'item' => $item, 'table' => $table, 'module' => $module);
+                    $select = Pi::model('point', $this->getModule())->select()->where($where);
+                    $countPoint = Pi::model('point', $this->getModule())->selectWith($select)->count();
 
-                $where = array('module' => $subModule, 'status' => 1);
-                $select = Pi::model('score', $this->getModule())->select()->where($where);
-                $countScore = Pi::model('score', $this->getModule())->selectWith($select)->count();
+                    $where = array('module' => $subModule, 'status' => 1);
+                    $select = Pi::model('score', $this->getModule())->select()->where($where);
+                    $countScore = Pi::model('score', $this->getModule())->selectWith($select)->count();
 
-                // Check point and module
-                if ($countPoint == $countScore) {
-                    switch ($subModule) {
-                        case 'event':
-                            $where = array('uid' => $uid, 'event' => $item);
-                            $select = Pi::model('order', 'event')->select()->where($where);
-                            $orderEvent = Pi::model('order', 'event')->selectWith($select)->count();
-                            if ($orderEvent > 0) {
+                    // Check point and module
+                    if ($countPoint == $countScore) {
+                        switch ($subModule) {
+                            case 'event':
+                                $where = array('uid' => $uid, 'event' => $item);
+                                $select = Pi::model('order', 'event')->select()->where($where);
+                                $orderEvent = Pi::model('order', 'event')->selectWith($select)->count();
+                                if ($orderEvent > 0) {
+                                    Pi::api('credit', 'order')->addCredit(
+                                        $uid,
+                                        $config['vote_credit_amount'],
+                                        'increase',
+                                        'automatic',
+                                        __('Add credit after voting'),
+                                        __('Add credit after voting'),
+                                        $subModule
+                                    );
+                                }
+                                break;
+
+                            default:
                                 Pi::api('credit', 'order')->addCredit(
                                     $uid,
                                     $config['vote_credit_amount'],
@@ -141,22 +144,19 @@ class Vote extends AbstractApi
                                     __('Add credit after voting'),
                                     $subModule
                                 );
-                            }
-                            break;
-
-                        default:
-                            Pi::api('credit', 'order')->addCredit(
-                                $uid,
-                                $config['vote_credit_amount'],
-                                'increase',
-                                'automatic',
-                                __('Add credit after voting'),
-                                __('Add credit after voting'),
-                                $subModule
-                            );
-                            break;
+                                break;
+                        }
                     }
                 }
+            } else {
+                if (!$delay) {
+                    $return['title'] = __('Error to voting');
+                    $return['message'] = sprintf(__('You can vote after %s second'), $config['vote_delay']);
+                } else {
+                    $return['title'] = __('Error to voting');
+                    $return['message'] = __('You already voted to this item');
+                }
+                $return['status'] = 0;
             }
         }
         return $return;
