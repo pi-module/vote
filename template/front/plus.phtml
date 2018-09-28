@@ -14,7 +14,7 @@ if ($vote['point'] > 0) {
 } elseif ($vote['point'] < 0) {
     $pointClass = 'btn-danger';
 } else {
-    $pointClass = 'btn-default';
+    $pointClass = 'btn-secondary';
 }
 
 // Set class
@@ -49,11 +49,11 @@ $onclickDown = sprintf($onclickDown,
 ?>
 <div id="votebar-<?php echo $voteId; ?>" class="clearfix votebar btn-group <?php echo $voteClass; ?>" itemscope
      itemtype="https://schema.org/Rating">
-    <a class="btn btn-default btn-sm" id="vote-<?php echo $voteId; ?>-up" onclick="<?php echo $onclickUp; ?>"><i
+    <a class="btn btn-secondary btn-sm" id="vote-<?php echo $voteId; ?>-up" onclick="<?php echo $onclickUp; ?>"><i
                 class="fa fa-thumbs-up"></i></a>
     <a class="btn <?php echo $pointClass; ?> btn-sm"
        id="vote-<?php echo $voteId; ?>-do"><?php echo _number($vote['point']); ?></a>
-    <a class="btn btn-default btn-sm" id="vote-<?php echo $voteId; ?>-down" onclick="<?php echo $onclickDown; ?>"><i
+    <a class="btn btn-secondary btn-sm" id="vote-<?php echo $voteId; ?>-down" onclick="<?php echo $onclickDown; ?>"><i
                 class="fa fa-thumbs-down"></i></a>
     <meta itemprop="worstRating" content="-1">
     <meta itemprop="bestRating" content="1">
