@@ -14,7 +14,7 @@
 namespace Module\Vote\Form;
 
 use Pi;
-use Zend\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilter;
 
 class ScoreFilter extends InputFilter
 {
